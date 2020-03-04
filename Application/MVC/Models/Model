@@ -1,1 +1,39 @@
-// Ici la modificaiton faite et la date pour qu'on puisse se synchroniser
+//ETML
+//Auteur: Sébastien kokot
+//date:04.03.20
+//description:va cherché les données est les passe au model
+//Modifiaction:
+//description modif:
+using phone.Controllers;
+
+namespace phone.Models
+{
+ 
+    public class Model
+    {
+        /// <summary>
+        /// getter et setter
+        /// </summary>
+        public Controller Ctrler { get; set; }
+
+        /// <summary>
+        /// constructeur de Model
+        /// </summary>
+        public Model()
+        {
+
+        }
+        
+        /// <summary>
+        /// reçois la requête 
+        /// </summary>
+        /// <param name="choose"></param>
+        /// <returns></returns>
+        public string Requiet(string choose)
+        {
+            return "";
+        }
+
+     
+    }
+}
