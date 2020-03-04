@@ -1,1 +1,43 @@
-// Ici la modificaiton faite et la date pour qu'on puisse se synchroniser
+//ETML
+//Auteur: Sébastien kokot
+//date:04.03.20
+//description:Fait le pont entre la vue et le model
+//Modifiaction:
+//description modif:
+using phone.Models;
+namespace phone.Controllers
+
+{
+
+    public class Controller
+    {
+        //variable
+        private Model _model;
+        private View _view;
+
+
+        /// <summary>
+        /// constructeur de Controller
+        /// </summary>
+        /// <param name="aModel">model</param>
+        /// <param name="aView">disigne</param>
+        public Controller(Model aModel, View aView)
+        {
+            this._model = aModel;
+            this._view = aView;
+
+            this._model.Ctrler = this;
+            this._view.Ctrler = this;
+        }
+
+        /// <summary>
+        /// reçois le choix de radio buttom et le donne à la vue
+        /// </summary>
+        /// <param name="choose"></param>
+        public void Choose (string choose)
+        {
+            _model.Requiet(choose);
+        }
+
+    }
+}
