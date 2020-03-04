@@ -1,1 +1,87 @@
-// Ici la modificaiton faite et la date pour qu'on puisse se synchroniser
+//ETML
+//Auteur: Sébastien kokot
+//date:04.03.20
+//description:afficher les données est envoie les données voulut par l'utilisateur 
+//Modifiaction:
+//description modif:
+using phone.Controllers;
+using System.Windows.Forms;
+
+namespace phone
+{
+    public partial class View : Form
+    {
+        /// <summary>
+        /// getter et setter
+        /// </summary>
+        public Controller Ctrler { get; set; }
+
+        /// <summary>
+        /// constructeur de View
+        /// </summary>
+        public View()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// exécute aux chargement
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void View_Load(object sender, System.EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// va chercher toutes les valeurs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butValidate_Click(object sender, System.EventArgs e)
+        {
+            //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
+            if(radButBattery.Checked == true)
+            {
+                Ctrler.Choose("Battery");
+            }
+            else if (radButBest.Checked==true)
+            {
+                Ctrler.Choose("Best");
+            }
+            else if(radButCheapest.Checked==true)
+            {
+                Ctrler.Choose("Cheapest");
+            }
+            else if (radButCPU.Checked==true)
+            {
+                Ctrler.Choose("CPU");
+            }
+            else if (radButExpensive.Checked==true)
+            {
+                Ctrler.Choose("Expensive");
+            }
+            else if(radButManufactor.Checked==true)
+            {
+                Ctrler.Choose("Manufactor");
+            }
+            else if(RadButOS.Checked==true)
+            {
+                Ctrler.Choose("OS");
+            }
+            else if(radButPreace.Checked==true)
+            {
+                Ctrler.Choose("Preace");
+            }
+            else if(radButScreen.Checked==true)
+            {
+                Ctrler.Choose("Screen");
+            }
+            else
+            {
+                MessageBox.Show("erreure de validation des radios but.");
+            }
+        }
+    }
+}
