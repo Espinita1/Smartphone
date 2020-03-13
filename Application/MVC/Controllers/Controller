@@ -1,43 +1,62 @@
-//ETML
-//Auteur: Sébastien kokot
-//date:04.03.20
-//description:Fait le pont entre la vue et le model
-//Modifiaction:
-//description modif:
-using phone.Models;
-namespace phone.Controllers
+/******************************************************************************
+** MODEL                                                                     **
+**                                                                           **
+** Lieu      :  ETML                                                         **
+** Auteur    :  Grp4                                                         **
+** Date      :  04.03.2020                                                   **
+**                                                                           **
+** Modifications                                                             **
+**   Author  :  Jordy Guzman                                                 **
+**   Version :  1.0                                                          **
+**   Date    :  04.03.2020                                                   **
+**   Reasons :  Implementation of a simple query method, a specific query,   **
+**   a constructor to connect to the database, a function to process data to **
+**   query, in short implement functions to set a connection and process data**
+**   to create a query and return the result to the View                     ** 
+******************************************************************************/
 
+/******************************************************************************
+** SUMMARY                                                                   **
+** Process data, create queries and return result.                           **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+using phone.Controllers;
+
+namespace phone.Models
 {
-
-    public class Controller
+ 
+    public class Model
     {
-        //variable
-        private Model _model;
-        private View _view;
-
-
         /// <summary>
-        /// constructeur de Controller
+        /// getter et setter
         /// </summary>
-        /// <param name="aModel">model</param>
-        /// <param name="aView">disigne</param>
-        public Controller(Model aModel, View aView)
-        {
-            this._model = aModel;
-            this._view = aView;
-
-            this._model.Ctrler = this;
-            this._view.Ctrler = this;
-        }
+        public Controller Ctrler { get; set; }
 
         /// <summary>
-        /// reçois le choix de radio buttom et le donne à la vue
+        /// constructeur de Model
+        /// </summary>
+        public Model()
+        {
+
+        }
+        
+        /// <summary>
+        /// reçois la requête 
         /// </summary>
         /// <param name="choose"></param>
-        public void Choose (string choose)
+        /// <returns></returns>
+        public void SimpleQuery(string choose)
         {
-            _model.Requiet(choose);
+            switch (choose)
+            {
+                case "Battery":
+                    break;
+                case "Best":
+                    break;
+            }
         }
 
+     
     }
 }
