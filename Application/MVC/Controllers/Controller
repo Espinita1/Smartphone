@@ -9,54 +9,49 @@
 **   Author  :  Jordy Guzman                                                 **
 **   Version :  1.0                                                          **
 **   Date    :  04.03.2020                                                   **
-**   Reasons :  Implementation of a simple query method, a specific query,   **
-**   a constructor to connect to the database, a function to process data to **
-**   query, in short implement functions to set a connection and process data**
-**   to create a query and return the result to the View                     ** 
+**   Reasons :  Add a comment header                                         ** 
 ******************************************************************************/
 
 /******************************************************************************
 ** SUMMARY                                                                   **
-** Process data, create queries and return result.                           **
-**                                                                           **
-**                                                                           **
+** Send parameters to the model inputted by the user, make the data passed   **
+** by the model here be prepared to pass it to the view, control of          **
+** exceptions.                                                               **
 ******************************************************************************/
-using phone.Controllers;
+using phone.Models;
+namespace phone.Controllers
 
-namespace phone.Models
 {
- 
-    public class Model
+
+    public class Controller
     {
-        /// <summary>
-        /// getter et setter
-        /// </summary>
-        public Controller Ctrler { get; set; }
+        //variable
+        private Model _model;
+        private View _view;
+
 
         /// <summary>
-        /// constructeur de Model
+        /// constructeur de Controller
         /// </summary>
-        public Model()
+        /// <param name="aModel">model</param>
+        /// <param name="aView">disigne</param>
+        public Controller(Model aModel, View aView)
         {
+            this._model = aModel;
+            this._view = aView;
 
+            this._model.Ctrler = this;
+            this._view.Ctrler = this;
         }
-        
+
         /// <summary>
-        /// reçois la requête 
+        /// reçois le choix de radio buttom et le donne à la vue
         /// </summary>
         /// <param name="choose"></param>
-        /// <returns></returns>
-        public void SimpleQuery(string choose)
+        public void Choose (string choose)
         {
-            switch (choose)
-            {
-                case "Battery":
-                    break;
-                case "Best":
-                    break;
-            }
+            _model.SimpleQuery(choose);
         }
 
-     
     }
 }
