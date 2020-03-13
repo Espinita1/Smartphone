@@ -1,9 +1,25 @@
-//ETML
-//Auteur: Sébastien kokot
-//date:04.03.20
-//description:afficher les données est envoie les données voulut par l'utilisateur 
-//Modifiaction:
-//description modif:
+/******************************************************************************
+** PROGRAMME                                                                 **
+**                                                                           **
+** Lieu      :  ETML                                                         **
+** Auteur    :  Grp4                                                         **
+** Date      :  04.03.2020                                                   **
+**                                                                           **
+** Modifications                                                             **
+**   Auteur  :  Jordy Guzman                                                 **
+**   Version :  1.0                                                          **
+**   Date    :  13.03.2020                                                   **
+**   Raisons :  Implementation of a query method                                                         **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+** View of the application.                                                  **     
+**                                                                           **
+**                                                                           **
+******************************************************************************/
 using phone.Controllers;
 using System.Windows.Forms;
 
