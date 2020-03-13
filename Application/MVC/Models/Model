@@ -1,9 +1,26 @@
-//ETML
-//Auteur: Sébastien kokot
-//date:04.03.20
-//description:va cherché les données est les passe au model
-//Modifiaction:
-//description modif:
+/******************************************************************************
+** MODEL                                                                     **
+**                                                                           **
+** Lieu      :  ETML                                                         **
+** Auteur    :  Grp4                                                         **
+** Date      :  04.03.2020                                                   **
+**                                                                           **
+** Modifications                                                             **
+**   Author  :  Jordy Guzman                                                 **
+**   Version :  1.0                                                          **
+**   Date    :  04.03.2020                                                   **
+**   Reasons :  Implementation of a simple query method, a specific query,   **
+**   a constructor to connect to the database, a function to process data to **
+**   query, in short implement functions to set a connection and process data**
+**   to create a query and return the result to the View                     ** 
+******************************************************************************/
+
+/******************************************************************************
+** SUMMARY                                                                   **
+** Process data, create queries and return result.                           **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
 using phone.Controllers;
 
 namespace phone.Models
@@ -29,9 +46,15 @@ namespace phone.Models
         /// </summary>
         /// <param name="choose"></param>
         /// <returns></returns>
-        public string Requiet(string choose)
+        public void SimpleQuery(string choose)
         {
-            return "";
+            switch (choose)
+            {
+                case "Battery":
+                    break;
+                case "Best":
+                    break;
+            }
         }
 
      
