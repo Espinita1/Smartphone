@@ -1,0 +1,12 @@
+SELECT `t_telephone`.`telName`, `t_price`.`priPrice`, `t_price`.`priDate`
+FROM `t_telephone` 
+    LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` 
+    WHERE `t_price`.`priDate`< "2020-01-29"
+ORDER BY `t_telephone`.`telName` ASC
+
+
+SELECT `t_telephone`.`telName`, `t_price`.`priPrice`, `t_price`.`priDate`
+FROM `t_telephone` 
+    LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` 
+    WHERE `t_price`.`priDate`= "2020-01-29"
+ORDER BY `t_telephone`.`telName` ASC
