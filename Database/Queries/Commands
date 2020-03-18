@@ -1,1 +1,67 @@
-Vos rêquetes SQL ici marquez description et date de chaque requête s'il vous plaît.
+-- 1) Tous les smartphones regroupés par OS
+
+SELECT `t_telephone`.`telName`, `t_operativesystem`.`opeName`
+FROM `t_operativesystem`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem`
+ORDER BY `t_operativesystem`.`opeName` ASC;
+
+-- 2) Smartphones par taille d'écran du plus grand au plus petit. 
+
+SELECT `t_telephone`.`telName`, `t_screen`.`scrSize`
+FROM `t_screen`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen`
+ORDER BY `t_screen`.`scrSize` DESC;
+
+-- 3) Evolution du prix en CHF de chaque appareil depuis sa sortie
+
+
+
+-- 4) Tous les smartphones regroupés par constructeur
+
+SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName`
+FROM `t_manufacturer`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`;
+
+-- 5) Les 5 meilleurs smartphones en fonction de leur autonomie
+
+SELECT `t_telephone`.`telName`, `t_battery`.`batDuration`
+FROM `t_battery`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkBattery` = `t_battery`.`idBattery`
+ORDER BY `t_battery`.`batDuration` DESC
+LIMIT 5;
+
+-- 6) Les 10 meilleurs smartphones en fonction de leur CPU
+
+SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence`
+FROM `t_cpu`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU`
+ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC
+LIMIT 10;
+
+-- 7) Les 5 meilleurs smartphones en fonction de leur CPU, taille d'écran et quantité de RAM
+
+SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence`, `t_screen`.`scrSize`, `t_ram`.`ramQuantity`
+FROM `t_cpu`
+    LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU`
+    LEFT JOIN `t_screen` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen`
+    LEFT JOIN `t_ram` ON `t_telephone`.`fkRam` = `t_ram`.`idRam`
+ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC, `t_screen`.`scrSize` DESC, `t_ram`.`ramQuantity` DESC
+LIMIT 5;
+
+-- 8) Les 3 smartphones les plus chers aujourd'hui
+
+SELECT `t_telephone`.`telName`, `t_price`.`priPrice`, `t_price`.`priDate`
+FROM `t_telephone`
+    LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone`
+ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` DESC, `t_telephone`.`telName` DESC
+LIMIT 3;
+
+--9) Le téléphone moins chère aujourd'hui par marque et OS
+
+SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName`, `t_operativesystem`.`opeName`, `t_price`.`priDate`, `t_price`.`priPrice`
+FROM `t_telephone`
+    LEFT JOIN `t_operativesystem` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem`
+    LEFT JOIN `t_manufacturer` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`
+    LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone`
+    WHERE `t_price`.`priDate` ="2020-01-29"
+ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` ASC LIMIT 1;
