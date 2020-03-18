@@ -3,12 +3,12 @@
 **                                                                           **
 ** Lieu      :  ETML                                                         **
 ** Auteur    :  Grp4                                                         **
-** Date      :  13.03.2020                                                   **
+** Date      :  04.03.2020                                                   **
 **                                                                           **
 ** Modifications                                                             **
 **   Author  :  Jordy Guzman                                                 **
 **   Version :  1.0                                                          **
-**   Date    :  04.03.2020                                                   **
+**   Date    :  13.03.2020                                                   **
 **   Reasons :  Implementation of a simple query method, a specific query,   **
 **   a constructor to connect to the database, a function to process data to **
 **   query, in short implement functions to set a connection and process data**
@@ -22,41 +22,55 @@
 **                                                                           **
 ******************************************************************************/
 using phone.Controllers;
+using System.Data.CData.MySQL;
 
 namespace phone.Models
 {
  
     public class Model
     {
+
         /// <summary>
         /// getter et setter
         /// </summary>
         public Controller Ctrler { get; set; }
 
+        private MySQLConnection mySqlConnector;
+    
         /// <summary>
         /// constructeur de Model
         /// </summary>
-        public Model()
+        public Model(string strConnectTo, string strSrvUser, string strSrvPassword)
         {
-
+            try 
+	        {
+                mySqlConnector = new MySQLConnection(strConnectTo + ";" + strSrvUser + ";" + strSrvPassword);
+                mySqlConnector.Open();
+	        }
+	        catch (System.Exception e)
+	        {
+		        throw e;
+	        }
         }
-        
+
         /// <summary>
-        /// reçois la requête 
+        /// A function MySQLDataReader called by another function to create a simple query and return the execution for later processes.
         /// </summary>
-        /// <param name="choose"></param>
-        /// <returns></returns>
-        public void SimpleQuery(string choose)
+        /// <param name="strQuery"></param>
+        private MySQLDataReader SimpleQuery(string strQuery)
         {
-            switch (choose)
-            {
-                case "Battery":
-                    break;
-                case "Best":
-                    break;
-            }
+            MySQLCommand mySqlSimpleQuery = new MySQLCommand(strQuery, mySqlConnector);
+            return mySqlSimpleQuery.ExecuteReader();
         }
 
-     
+        /// <summary>
+        /// Return all the informations by executing various functions to show a 
+        /// </summary>
+        private void getAllInfos()
+        {
+            //
+            string strSimpleQuery = "SELECT * FROM t_telephones;";
+            
+        }
     }
 }
