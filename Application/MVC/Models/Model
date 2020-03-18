@@ -22,6 +22,8 @@
 **                                                                           **
 ******************************************************************************/
 using phone.Controllers;
+using System;
+using System.Data;
 using System.Data.CData.MySQL;
 
 namespace phone.Models
@@ -33,18 +35,23 @@ namespace phone.Models
         /// <summary>
         /// getter et setter
         /// </summary>
-        public Controller Ctrler { get; set; }
+        public Controller Ctrler { get; set; } // Link from controller
 
-        private MySQLConnection mySqlConnector;
+        private MySQLConnection mySqlConnector; // A connector to our database MySQL
     
         /// <summary>
-        /// constructeur de Model
+        /// 
         /// </summary>
-        public Model(string strConnectTo, string strSrvUser, string strSrvPassword)
+        /// <param name="strConnectTo">"nameofserver=ipofserver"</param>
+        /// <param name="strSrvUser">"account name in server on server"</param>
+        /// <param name="strSrvPassword">"the password of the account on server"</param>
+        /// <param name="strDataBase">"Name of the database"</param>
+        public Model(string strConnectTo, string strSrvUser, string strSrvPassword, string strDataBase)
         {
             try 
 	        {
-                mySqlConnector = new MySQLConnection(strConnectTo + ";" + strSrvUser + ";" + strSrvPassword);
+                // Try to connect to the specified server
+                mySqlConnector = new MySQLConnection(strConnectTo + ";" + strSrvUser + ";" + strSrvPassword + ";" + strDataBase + ";");
                 mySqlConnector.Open();
 	        }
 	        catch (System.Exception e)
@@ -57,20 +64,37 @@ namespace phone.Models
         /// A function MySQLDataReader called by another function to create a simple query and return the execution for later processes.
         /// </summary>
         /// <param name="strQuery"></param>
-        private MySQLDataReader SimpleQuery(string strQuery)
+        private MySQLDataAdapter SimpleQuery(string strQuery)
         {
-            MySQLCommand mySqlSimpleQuery = new MySQLCommand(strQuery, mySqlConnector);
-            return mySqlSimpleQuery.ExecuteReader();
+            // Initializes a new instance of the MySqlDataAdapter class with a SelectCommand and a MySqlConnection object.
+            MySQLDataAdapter mySqlSimpleQuery = new MySQLDataAdapter(strQuery, mySqlConnector);
+            // Return command
+            return mySqlSimpleQuery;
+        }
+
+        private DataTable FormatTheData (MySQLDataAdapter msqlQuery)
+        {
+            // Data table 
+            DataTable datTabResult = new DataTable();
+            // Fill the data table
+            msqlQuery.Fill(datTabResult);
+            // Return data table
+            return datTabResult;
         }
 
         /// <summary>
-        /// Return all the informations by executing various functions to show a 
+        /// Return all the informations by executing various functions to return a table with the executed query
         /// </summary>
-        private void getAllInfos()
+        public DataTable GetAllInfos()
         {
-            //
+            // A simple query
             string strSimpleQuery = "SELECT * FROM t_telephones;";
-            
+            // This will return the result
+            MySQLDataAdapter msqlQueryResult = SimpleQuery(strSimpleQuery);
+            // This will convert the result into a table
+            DataTable dttblAll = FormatTheData(msqlQueryResult);
+            // return a table with the long ago executed query
+            return dttblAll;
         }
     }
 }
