@@ -21,7 +21,9 @@
 **                                                                           **
 ******************************************************************************/
 using phone.Controllers;
+using System;
 using System.Windows.Forms;
+using System.Data;
 
 namespace phone
 {
@@ -60,44 +62,52 @@ namespace phone
             //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
             if(radButBattery.Checked == true)
             {
-                Ctrler.Choose("Battery");
+                //Ctrler.Choose("Battery");
             }
             else if (radButBest.Checked==true)
             {
-                Ctrler.Choose("Best");
+                //Ctrler.Choose("Best");
             }
             else if(radButCheapest.Checked==true)
             {
-                Ctrler.Choose("Cheapest");
+                //Ctrler.Choose("Cheapest");
             }
             else if (radButCPU.Checked==true)
             {
-                Ctrler.Choose("CPU");
+                //Ctrler.Choose("CPU");
             }
             else if (radButExpensive.Checked==true)
             {
-                Ctrler.Choose("Expensive");
+                //Ctrler.Choose("Expensive");
             }
             else if(radButManufactor.Checked==true)
             {
-                Ctrler.Choose("Manufactor");
+                //Ctrler.Choose("Manufactor");
             }
             else if(RadButOS.Checked==true)
             {
-                Ctrler.Choose("OS");
+                //Ctrler.Choose("OS");
             }
             else if(radButPreace.Checked==true)
             {
-                Ctrler.Choose("Preace");
+                //Ctrler.Choose("Preace");
             }
             else if(radButScreen.Checked==true)
             {
-                Ctrler.Choose("Screen");
+                //Ctrler.Choose("Screen");
             }
             else
             {
                 MessageBox.Show("erreure de validation des radios but.");
             }
+        }
+        /// <summary>
+        /// Fill the dataview with the datatable passed by parameter from model to controller to this method.
+        /// </summary>
+        /// <param name="dttblParam"></param>
+        public void SetGridView (DataTable dttblParam)
+        {
+            dtgrdApplication.DataSource = dttblParam;
         }
     }
 }
