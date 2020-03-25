@@ -3,12 +3,12 @@
 **                                                                           **
 ** Lieu      :  ETML                                                         **
 ** Auteur    :  Grp4                                                         **
-** Date      :  13.03.2020                                                   **
+** Date      :  04.03.2020                                                   **
 **                                                                           **
 ** Modifications                                                             **
 **   Author  :  Jordy Guzman                                                 **
 **   Version :  1.0                                                          **
-**   Date    :  04.03.2020                                                   **
+**   Date    :  13.03.2020                                                   **
 **   Reasons :  Add a comment header                                         ** 
 ******************************************************************************/
 
@@ -19,6 +19,7 @@
 ** exceptions.                                                               **
 ******************************************************************************/
 using phone.Models;
+using System.Data;
 namespace phone.Controllers
 
 {
@@ -35,22 +36,34 @@ namespace phone.Controllers
         /// </summary>
         /// <param name="aModel">model</param>
         /// <param name="aView">disigne</param>
-        public Controller(Model aModel, View aView)
+        public Controller (Model aModel, View aView)
         {
             this._model = aModel;
             this._view = aView;
 
             this._model.Ctrler = this;
             this._view.Ctrler = this;
+            SetGrid();
         }
 
         /// <summary>
         /// reçois le choix de radio buttom et le donne à la vue
         /// </summary>
         /// <param name="choose"></param>
-        public void Choose (string choose)
+        //public DataTable Choose (string choose)
+        //{
+
+        //    return dtTable;
+        //}
+
+        /// <summary>
+        /// Set the grid at the start of this program, this will return a datatable and adjust the rows and columns in the datagrid
+        /// </summary>
+        /// <param name=""></param>
+        public void SetGrid()
         {
-            _model.SimpleQuery(choose);
+            DataTable dtTable = _model.GetAllInfos();
+            _view.SetGridView(dtTable);
         }
 
     }
