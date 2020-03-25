@@ -33,7 +33,7 @@ namespace phone.Models
     {
 
         /// <summary>
-        /// getter et setter
+        /// get et set
         /// </summary>
         public Controller Ctrler { get; set; } // Link from controller
 
