@@ -1,0 +1,51 @@
+/******************************************************************************
+** PROGRAMME                                                                 **
+**                                                                           **
+** Lieu      :  ETML                                                         **
+** Auteur    :  Grp4                                                         **
+** Date      :  20.03.2020                                                   **
+**                                                                           **
+** Modifications                                                             **
+**   Auteur  :  Jordy Guzman                                                 **
+**   Version :  1.0                                                          **
+**   Date    :  20.03.2020                                                   **
+**   Raisons :  Correction d'entête, inisialisation des classes MVC          **
+**                                                                           **
+**                                                                           **
+******************************************************************************/
+
+/******************************************************************************
+** DESCRIPTION                                                               **
+** Main qui démarre les forms, établie la connexio à la base de données,     **     
+** intitialise les classes MVC                                               **
+**                                                                           **
+******************************************************************************/
+using System;
+using System.Windows.Forms;
+using phone.Controllers;
+using phone.Models;
+
+namespace phone
+{
+    static class Program
+    {
+        /// <summary>
+        /// Point d'entrée principal de l'application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            string strTo = "mysql=127.0.0.1";
+            string strUser = "root";
+            string strPassword = "root";
+            string strDataBase = "dbname=db_phones";
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Model aModel = new Model(strTo, strUser, strPassword, strDataBase);
+            View aView = new View();
+            Controller aCtrler = new Controller(aModel, aView);
+            
+            Application.Run(aView);
+        }
+    }
+}
