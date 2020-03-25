@@ -35,10 +35,10 @@ namespace phone
         [STAThread]
         static void Main()
         {
-            string strTo = "mysql=127.0.0.1";
-            string strUser = "root";
-            string strPassword = "root";
-            string strDataBase = "dbname=db_phones";
+            string strTo = "Server=127.0.0.1";
+            string strUser = "Uid=root";
+            string strPassword = "Pwd=root";
+            string strDataBase = "Database=db_phones";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Model aModel = new Model(strTo, strUser, strPassword, strDataBase);
