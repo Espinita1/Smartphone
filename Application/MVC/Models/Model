@@ -33,7 +33,7 @@ namespace phone.Models
     {
 
         /// <summary>
-        /// get et set
+        /// get set
         /// </summary>
         public Controller Ctrler { get; set; } // Link from controller
 
@@ -51,7 +51,7 @@ namespace phone.Models
             try 
 	        {
                 // Try to connect to the specified server
-                mySqlConnector = new MySQLConnection(strConnectTo + ";" + strSrvUser + ";" + strSrvPassword + ";" + strDataBase + ";");
+                mySqlConnector = new MySQLConnection(strConnectTo + ";" + strDataBase + ";" + strSrvUser + ";" + strSrvPassword + ";");
                 mySqlConnector.Open();
 	        }
 	        catch (System.Exception e)
@@ -88,13 +88,18 @@ namespace phone.Models
         public DataTable GetAllInfos()
         {
             // A simple query
-            string strSimpleQuery = "SELECT * FROM t_telephones;";
+            string strSimpleQuery = "SELECT * FROM t_telephone;";
             // This will return the result
             MySQLDataAdapter msqlQueryResult = SimpleQuery(strSimpleQuery);
             // This will convert the result into a table
             DataTable dttblAll = FormatTheData(msqlQueryResult);
             // return a table with the long ago executed query
             return dttblAll;
+        }
+
+        public void SetGridView()
+        {
+            DataTable hee = GetAllInfos();
         }
     }
 }
