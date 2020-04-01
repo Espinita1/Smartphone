@@ -47,14 +47,56 @@ namespace phone.Controllers
         }
 
         /// <summary>
-        /// reçois le choix de radio buttom et le donne à la vue
+        /// Receive the predefined choice from the radio button for the specific query
         /// </summary>
         /// <param name="choose"></param>
-        //public DataTable Choose (string choose)
-        //{
+        public void SpecificQuery (string strSelection)
+        {
+            switch(strSelection)
+            {
+                case "Battery":
+                    DataTable dtTableSpeQueryBat = _model.SpecificQueryCommandBattery();
+                    _view.SetGridView(dtTableSpeQueryBat);
+                    break;
 
-        //    return dtTable;
-        //}
+                case "OS":
+                    DataTable dtTableSpeQueryOpSys = _model.SpecificQueryCommandOpSys();
+                    _view.SetGridView(dtTableSpeQueryOpSys);
+                    break;
+
+                case "Manufacturer":
+                    DataTable dtTableSpeQueryManufacturer = _model.SpecificQueryCommandManufacturer();
+                    _view.SetGridView(dtTableSpeQueryManufacturer);
+                    break;
+
+                case "Screen":
+                    DataTable dtTableSpeQueryScreen = _model.SpecificQueryCommandScreen();
+                    _view.SetGridView(dtTableSpeQueryScreen);
+                    break;
+
+                case "CPU":
+                    DataTable dtTableSpeQueryCpu = _model.SpecificQueryCommandCpu();
+                    _view.SetGridView(dtTableSpeQueryCpu);
+                    break;
+
+                case "Expensive":
+                    DataTable dtTableSpeQueryMostExpensive = _model.SpecificQueryCommandMostExpensive();
+                    _view.SetGridView(dtTableSpeQueryMostExpensive);
+                    break;
+
+                case "Best":
+                    DataTable dtTableSpeQueryTheBest = _model.SpecificQueryCommandTheBest();
+                    _view.SetGridView(dtTableSpeQueryTheBest);
+                    break;
+                case "Cheapest":
+                    DataTable dtTableSpeQueryCheapest = _model.SpecificQueryCommandCheapest();
+                    _view.SetGridView(dtTableSpeQueryCheapest);
+                    break;
+                default:
+
+                    break;
+            }
+        }
 
         /// <summary>
         /// Set the grid at the start of this program, this will return a datatable and adjust the rows and columns in the datagrid
@@ -65,6 +107,5 @@ namespace phone.Controllers
             DataTable dtTable = _model.GetAllInfos();
             _view.SetGridView(dtTable);
         }
-
     }
 }
