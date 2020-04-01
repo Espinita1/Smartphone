@@ -1,0 +1,9 @@
+C:\Users\gusta\Downloads\Mockup\Mockup\bin\Debug\Mockup.exe.config
+C:\Users\gusta\Downloads\Mockup\Mockup\bin\Debug\Mockup.exe
+C:\Users\gusta\Downloads\Mockup\Mockup\bin\Debug\Mockup.pdb
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.csprojAssemblyReference.cache
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.frmPhones.resources
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.Properties.Resources.resources
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.csproj.GenerateResource.cache
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.exe
+C:\Users\gusta\Downloads\Mockup\Mockup\obj\Debug\Mockup.pdb
