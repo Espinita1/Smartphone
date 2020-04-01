@@ -19,7 +19,6 @@
 ** SUMMARY                                                                   **
 ** Process data, create queries and return result.                           **
 **                                                                           **
-**                                                                           **
 ******************************************************************************/
 using phone.Controllers;
 using System;
@@ -28,7 +27,7 @@ using System.Data.CData.MySQL;
 
 namespace phone.Models
 {
- 
+
     public class Model
     {
 
@@ -38,7 +37,7 @@ namespace phone.Models
         public Controller Ctrler { get; set; } // Link from controller
 
         private MySQLConnection mySqlConnector; // A connector to our database MySQL
-    
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,23 +47,23 @@ namespace phone.Models
         /// <param name="strDataBase">"Name of the database"</param>
         public Model(string strConnectTo, string strSrvUser, string strSrvPassword, string strDataBase)
         {
-            try 
-	        {
+            try
+            {
                 // Try to connect to the specified server
                 mySqlConnector = new MySQLConnection(strConnectTo + ";" + strDataBase + ";" + strSrvUser + ";" + strSrvPassword + ";");
                 mySqlConnector.Open();
-	        }
-	        catch (System.Exception e)
-	        {
-		        throw e;
-	        }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
         /// A function MySQLDataReader called by another function to create a simple query and return the execution for later processes.
         /// </summary>
         /// <param name="strQuery"></param>
-        private MySQLDataAdapter SimpleQuery(string strQuery)
+        private MySQLDataAdapter QueryMaker(string strQuery)
         {
             // Initializes a new instance of the MySqlDataAdapter class with a SelectCommand and a MySqlConnection object.
             MySQLDataAdapter mySqlSimpleQuery = new MySQLDataAdapter(strQuery, mySqlConnector);
@@ -72,7 +71,12 @@ namespace phone.Models
             return mySqlSimpleQuery;
         }
 
-        private DataTable FormatTheData (MySQLDataAdapter msqlQuery)
+        /// <summary>
+        /// Get the query adapter by parameters then proceed to fill a table with the adapterof the sql Query to fill a table
+        /// </summary>
+        /// <param name="msqlQuery"></param>
+        /// <returns></returns>
+        private DataTable FormatTheData(MySQLDataAdapter msqlQuery)
         {
             // Data table 
             DataTable datTabResult = new DataTable();
@@ -88,18 +92,132 @@ namespace phone.Models
         public DataTable GetAllInfos()
         {
             // A simple query
-            string strSimpleQuery = "SELECT * FROM t_telephone;";
+            string strSimpleQuery = "SELECT telName AS Téléphone, stoCapacity AS Stockage, cpuNbrCore AS ' nombre de coeurs', cpuFrequence as Fréquence, ramQuantity AS Ram, manName AS Fabricant, batCapacity AS Capacité, batDuration AS Duration, venName as Vendeur, opeName AS 'Système d''exploitation', priPrice AS Prix FROM t_telephone INNER JOIN t_storage ON fkStorage=idStorage INNER JOIN t_ram ON fkRam=idRam INNER JOIN t_manufacturer ON fkManufacturer = idManufacturer INNER JOIN t_battery ON fkBattery = idBattery INNER JOIN t_vendor ON fkVendor=idVendor INNER JOIN t_operativeSystem on fkOperativeSystem=idOperativeSystem INNER JOIN t_cpu on fkCPU = idCPU INNER JOIN t_price ON fkTelephone=idTelephone WHERE priDate > '2018/01/01';";
             // This will return the result
-            MySQLDataAdapter msqlQueryResult = SimpleQuery(strSimpleQuery);
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strSimpleQuery);
             // This will convert the result into a table
             DataTable dttblAll = FormatTheData(msqlQueryResult);
             // return a table with the long ago executed query
             return dttblAll;
         }
 
-        public void SetGridView()
+        ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
+
+        /// <summary>
+        /// Battery
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandBattery()
         {
-            DataTable hee = GetAllInfos();
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_battery`.`batDuration` FROM `t_battery`LEFT JOIN `t_telephone` ON `t_telephone`.`fkBattery` = `t_battery`.`idBattery` ORDER BY `t_battery`.`batDuration` DESC LIMIT 5;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryBatt = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryBatt;
         }
+
+        /// <summary>
+        /// oper
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandOpSys()
+        {
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_operativesystem`.`opeName` FROM `t_operativesystem` LEFT JOIN `t_telephone` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem` ORDER BY `t_operativesystem`.`opeName` ASC;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryOpSys = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryOpSys;
+        }
+
+        /// <summary>
+        /// screen
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandScreen()
+        {
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_screen`.`scrSize` FROM `t_screen` LEFT JOIN `t_telephone` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen` ORDER BY `t_screen`.`scrSize` DESC;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryScreen = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryScreen;
+        }
+
+        /// <summary>
+        /// manu
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandManufacturer()
+        {
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName` FROM `t_manufacturer` LEFT JOIN `t_telephone` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryManufacturer = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryManufacturer;
+        }
+
+        /// <summary>
+        /// cpu
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandCpu()
+        {
+            string strQuery = "SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence` FROM `t_cpu`LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC LIMIT 10;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryCpu = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryCpu;
+        }
+
+        /// <summary>
+        /// expensive
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandMostExpensive()
+        {
+            string strQuery = "SELECT `t_telephone`.`telName`, `t_price`.`priPrice`, `t_price`.`priDate` FROM `t_telephone` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` DESC, `t_telephone`.`telName` DESC LIMIT 3; ";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryMostExpensive = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryMostExpensive;
+        }
+
+        /// <summary>
+        /// thebest
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SpecificQueryCommandTheBest()
+        {
+            string strQuery = "SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence`, `t_screen`.`scrSize`, `t_ram`.`ramQuantity` FROM `t_cpu` LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` LEFT JOIN `t_screen` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen` LEFT JOIN `t_ram` ON `t_telephone`.`fkRam` = `t_ram`.`idRam` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC, `t_screen`.`scrSize` DESC, `t_ram`.`ramQuantity` DESC LIMIT 5;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryTheBest = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryTheBest;
+        }
+
+        public DataTable SpecificQueryCommandCheapest()
+        {
+            string strQuery = "SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName`, `t_operativesystem`.`opeName`, `t_price`.`priDate`, `t_price`.`priPrice` FROM `t_telephone` LEFT JOIN `t_operativesystem` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem` LEFT JOIN `t_manufacturer` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` WHERE `t_price`.`priDate` = '2020-01-29' ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` ASC LIMIT 1;";
+
+            MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
+
+            DataTable dttblSpecificQueryCheapest = FormatTheData(msqlQueryResult);
+
+            return dttblSpecificQueryCheapest;
+        }
+        ////////////////////////////////// QUERIES ///////////////////////////////////////
     }
 }
