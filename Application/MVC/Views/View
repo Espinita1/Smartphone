@@ -9,7 +9,7 @@
 **   Auteur  :  Jordy Guzman                                                 **
 **   Version :  1.0                                                          **
 **   Date    :  13.03.2020                                                   **
-**   Raisons :  Implementation of a query method                                                         **
+**   Raisons :  Implementation of a query method                             **
 **                                                                           **
 **                                                                           **
 ******************************************************************************/
@@ -17,8 +17,6 @@
 /******************************************************************************
 ** DESCRIPTION                                                               **
 ** View of the application.                                                  **     
-**                                                                           **
-**                                                                           **
 ******************************************************************************/
 using phone.Controllers;
 using System;
@@ -62,43 +60,43 @@ namespace phone
             //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
             if(radButBattery.Checked == true)
             {
-                //Ctrler.Choose("Battery");
+                Ctrler.SpecificQuery("Battery");
             }
             else if (radButBest.Checked==true)
             {
-                //Ctrler.Choose("Best");
+                Ctrler.SpecificQuery("Best");
             }
             else if(radButCheapest.Checked==true)
             {
-                //Ctrler.Choose("Cheapest");
+                Ctrler.SpecificQuery("Cheapest");
             }
             else if (radButCPU.Checked==true)
             {
-                //Ctrler.Choose("CPU");
+                Ctrler.SpecificQuery("CPU");
             }
             else if (radButExpensive.Checked==true)
             {
-                //Ctrler.Choose("Expensive");
+                Ctrler.SpecificQuery("Expensive");
             }
             else if(radButManufactor.Checked==true)
             {
-                //Ctrler.Choose("Manufactor");
+                Ctrler.SpecificQuery("Manufacturer");
             }
             else if(RadButOS.Checked==true)
             {
-                //Ctrler.Choose("OS");
+                Ctrler.SpecificQuery("OS");
             }
             else if(radButPreace.Checked==true)
             {
-                //Ctrler.Choose("Preace");
+                Ctrler.SpecificQuery("Price");
             }
             else if(radButScreen.Checked==true)
             {
-                //Ctrler.Choose("Screen");
+                Ctrler.SpecificQuery("Screen");
             }
             else
             {
-                MessageBox.Show("erreure de validation des radios but.");
+                MessageBox.Show("erreure de validation.");
             }
         }
         /// <summary>
