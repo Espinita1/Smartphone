@@ -14,7 +14,10 @@ ORDER BY `t_screen`.`scrSize` DESC;
 
 -- 3) Evolution du prix en CHF de chaque appareil depuis sa sortie
 
-
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_price`.`priDate` AS Date, `t_price`.`priPrice` AS Prix 
+FROM `t_telephone` 
+    LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` 
+ORDER BY `t_price`.`priDate` ASC
 
 -- 4) Tous les smartphones regroupés par constructeur
 
