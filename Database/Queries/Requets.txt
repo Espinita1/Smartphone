@@ -21,13 +21,13 @@ ORDER BY `t_price`.`priDate` ASC
 
 -- 4) Tous les smartphones regroupés par constructeur
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS "Constructeur"
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS Constructeur
 FROM `t_manufacturer`
     LEFT JOIN `t_telephone` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`;
 
 -- 5) Les 5 meilleurs smartphones en fonction de leur autonomie
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_battery`.`batDuration` AS "Autonomie"
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_battery`.`batDuration` AS Autonomie
 FROM `t_battery`
     LEFT JOIN `t_telephone` ON `t_telephone`.`fkBattery` = `t_battery`.`idBattery`
 ORDER BY `t_battery`.`batDuration` DESC
@@ -35,7 +35,7 @@ LIMIT 5;
 
 -- 6) Les 10 meilleurs smartphones en fonction de leur CPU
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des Cores", `t_cpu`.`cpuFrequence` AS "Fréquence"
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des Cores", `t_cpu`.`cpuFrequence` AS Fréquence
 FROM `t_cpu`
     LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU`
 ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC
@@ -43,7 +43,7 @@ LIMIT 10;
 
 -- 7) Les 5 meilleurs smartphones en fonction de leur CPU, taille d'écran et quantité de RAM
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des cores", `t_cpu`.`cpuFrequence` AS "Fréquence", 
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des cores", `t_cpu`.`cpuFrequence` AS Fréquence, 
 `t_screen`.`scrSize` AS "Taille d'écran", `t_ram`.`ramQuantity` AS "Quantité de RAM"
 FROM `t_cpu`
     LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU`
@@ -54,7 +54,7 @@ LIMIT 5;
 
 -- 8) Les 3 smartphones les plus chers aujourd'hui
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_price`.`priPrice` AS "Prix", `t_price`.`priDate` AS "Date"
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_price`.`priPrice` AS Prix, `t_price`.`priDate` AS Date
 FROM `t_telephone`
     LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone`
 ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` DESC, `t_telephone`.`telName` DESC
@@ -62,8 +62,8 @@ LIMIT 3;
 
 --9) Le téléphone moins chère aujourd'hui par marque et OS
 
-SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS "Fabricant", `t_operativesystem`.`opeName` AS "Système d'exploitation", 
-`t_price`.`priDate` AS "Date", `t_price`.`priPrice` AS "Prix"
+SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS Fabricant, `t_operativesystem`.`opeName` AS "Système d'exploitation", 
+`t_price`.`priDate` AS Date, `t_price`.`priPrice` AS Prix
 FROM `t_telephone`
     LEFT JOIN `t_operativesystem` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem`
     LEFT JOIN `t_manufacturer` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`
