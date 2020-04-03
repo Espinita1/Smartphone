@@ -114,7 +114,8 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandBattery()
         {
-            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_battery`.`batDuration` FROM `t_battery`LEFT JOIN `t_telephone` ON `t_telephone`.`fkBattery` = `t_battery`.`idBattery` ORDER BY `t_battery`.`batDuration` DESC LIMIT 5;";
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_battery`.`batDuration` AS "Autonomie"
+FROM `t_battery` LEFT JOIN `t_telephone` ON `t_telephone`.`fkBattery` = `t_battery`.`idBattery` ORDER BY `t_battery`.`batDuration` DESC LIMIT 5;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -129,7 +130,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandOpSys()
         {
-            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_operativesystem`.`opeName` FROM `t_operativesystem` LEFT JOIN `t_telephone` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem` ORDER BY `t_operativesystem`.`opeName` ASC;";
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_operativesystem`.`opeName` AS "Système d'exploitation" FROM `t_operativesystem` LEFT JOIN `t_telephone` ON `t_telephone`.`fkOperativeSystem`=`t_operativesystem`.`idOperativeSystem` ORDER BY `t_operativesystem`.`opeName` ASC;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -144,7 +145,8 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandScreen()
         {
-            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_screen`.`scrSize` FROM `t_screen` LEFT JOIN `t_telephone` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen` ORDER BY `t_screen`.`scrSize` DESC;";
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_screen`.`scrSize` AS "Taille d'écran"
+FROM `t_screen` LEFT JOIN `t_telephone` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen` ORDER BY `t_screen`.`scrSize` DESC;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -159,7 +161,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandManufacturer()
         {
-            string strQuery = strQuery = "SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName` FROM `t_manufacturer` LEFT JOIN `t_telephone` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`;";
+            string strQuery = strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS "Constructeur" FROM `t_manufacturer` LEFT JOIN `t_telephone` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer`;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -174,7 +176,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandCpu()
         {
-            string strQuery = "SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence` FROM `t_cpu`LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC LIMIT 10;";
+            string strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des Cores", `t_cpu`.`cpuFrequence` AS "Fréquence" FROM `t_cpu` LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC LIMIT 10;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -189,7 +191,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandMostExpensive()
         {
-            string strQuery = "SELECT `t_telephone`.`telName`, `t_price`.`priPrice`, `t_price`.`priDate` FROM `t_telephone` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` DESC, `t_telephone`.`telName` DESC LIMIT 3; ";
+            string strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_price`.`priPrice` AS "Prix", `t_price`.`priDate` AS "Date" FROM `t_telephone` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` DESC, `t_telephone`.`telName` DESC LIMIT 3;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -204,7 +206,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandTheBest()
         {
-            string strQuery = "SELECT `t_telephone`.`telName`, `t_cpu`.`cpuNbrCore`, `t_cpu`.`cpuFrequence`, `t_screen`.`scrSize`, `t_ram`.`ramQuantity` FROM `t_cpu` LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` LEFT JOIN `t_screen` ON `t_telephone`.`fkScreen` = `t_screen`.`idScreen` LEFT JOIN `t_ram` ON `t_telephone`.`fkRam` = `t_ram`.`idRam` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC, `t_screen`.`scrSize` DESC, `t_ram`.`ramQuantity` DESC LIMIT 5;";
+            string strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_cpu`.`cpuNbrCore` AS "Nombre des cores", `t_cpu`.`cpuFrequence` AS "Fréquence", `t_screen`.`scrSize` AS "Taille d'écran", `t_ram`.`ramQuantity` AS "Quantité de RAM" FROM `t_cpu` LEFT JOIN `t_telephone` ON `t_telephone`.`fkCPU` = `t_cpu`.`idCPU` LEFT JOIN `t_screen` ON `t_telephone`.`fkScreen`=`t_screen`.`idScreen` LEFT JOIN `t_ram` ON `t_telephone`.`fkRam`=`t_ram`.`idRam` ORDER BY `t_cpu`.`cpuNbrCore` DESC, `t_cpu`.`cpuFrequence` DESC, `t_screen`.`scrSize` DESC, `t_ram`.`ramQuantity` DESC LIMIT 5;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -215,7 +217,7 @@ namespace phone.Models
 
         public DataTable SpecificQueryCommandCheapest()
         {
-            string strQuery = "SELECT `t_telephone`.`telName`, `t_manufacturer`.`manName`, `t_operativesystem`.`opeName`, `t_price`.`priDate`, `t_price`.`priPrice` FROM `t_telephone` LEFT JOIN `t_operativesystem` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem` LEFT JOIN `t_manufacturer` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` WHERE `t_price`.`priDate` = '2020-01-29' ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` ASC LIMIT 1;";
+            string strQuery = "SELECT `t_telephone`.`telName` AS "Nom du téléphone", `t_manufacturer`.`manName` AS "Fabricant", `t_operativesystem`.`opeName` AS "Système d'exploitation", `t_price`.`priDate` AS "Date", `t_price`.`priPrice` AS "Prix" FROM `t_telephone` LEFT JOIN `t_operativesystem` ON `t_telephone`.`fkOperativeSystem` = `t_operativesystem`.`idOperativeSystem` LEFT JOIN `t_manufacturer` ON `t_telephone`.`fkManufacturer` = `t_manufacturer`.`idManufacturer` LEFT JOIN `t_price` ON `t_price`.`fkTelephone` = `t_telephone`.`idTelephone` WHERE `t_price`.`priDate` ="2020-01-29" ORDER BY `t_price`.`priDate` DESC, `t_price`.`priPrice` ASC LIMIT 1;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
