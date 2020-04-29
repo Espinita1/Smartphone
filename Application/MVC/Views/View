@@ -18,13 +18,12 @@
 ** DESCRIPTION                                                               **
 ** View of the application.                                                  **     
 ******************************************************************************/
-using phone.Controllers;
+
 using System;
 using System.Windows.Forms;
 using System.Data;
 
-namespace phone
-{
+
     public partial class View : Form
     {
         /// <summary>
@@ -51,46 +50,55 @@ namespace phone
         }
 
         /// <summary>
+        /// Fill the dataview with the datatable passed by parameter from model to controller to this method.
+        /// </summary>
+        /// <param name="dttblParam"></param>
+        public void SetGridView(DataTable dttblParam)
+        {
+            dtgrdApplication.DataSource = dttblParam;
+        }
+
+        /// <summary>
         /// va chercher toutes les valeurs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void butValidate_Click(object sender, System.EventArgs e)
+        private void BtnApplySearch_Click(object sender, EventArgs e)
         {
             //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
-            if(radButBattery.Checked == true)
+            if (radBtnBestAutonomy.Checked == true)
             {
                 Ctrler.SpecificQuery("Battery");
             }
-            else if (radButBest.Checked==true)
+            else if (radBtnBestPhones.Checked == true)
             {
                 Ctrler.SpecificQuery("Best");
             }
-            else if(radButCheapest.Checked==true)
+            else if (radBtnCheapest.Checked == true)
             {
                 Ctrler.SpecificQuery("Cheapest");
             }
-            else if (radButCPU.Checked==true)
+            else if (radBtnBestCpu.Checked == true)
             {
                 Ctrler.SpecificQuery("CPU");
             }
-            else if (radButExpensive.Checked==true)
+            else if (radBtnMoreExpensive.Checked == true)
             {
                 Ctrler.SpecificQuery("Expensive");
             }
-            else if(radButManufactor.Checked==true)
+            else if (radBtnManufacturer.Checked == true)
             {
                 Ctrler.SpecificQuery("Manufacturer");
             }
-            else if(RadButOS.Checked==true)
+            else if (radBtnOS.Checked == true)
             {
                 Ctrler.SpecificQuery("OS");
             }
-            else if(radButPreace.Checked==true)
+            else if (radBtnPriceEvolution.Checked == true)
             {
-                Ctrler.SpecificQuery("Price");
+                Ctrler.SpecificQuery("PriceEvo");
             }
-            else if(radButScreen.Checked==true)
+            else if (radBtnScreenSize.Checked == true)
             {
                 Ctrler.SpecificQuery("Screen");
             }
@@ -99,13 +107,5 @@ namespace phone
                 MessageBox.Show("erreure de validation.");
             }
         }
-        /// <summary>
-        /// Fill the dataview with the datatable passed by parameter from model to controller to this method.
-        /// </summary>
-        /// <param name="dttblParam"></param>
-        public void SetGridView (DataTable dttblParam)
-        {
-            dtgrdApplication.DataSource = dttblParam;
-        }
     }
-}
+
