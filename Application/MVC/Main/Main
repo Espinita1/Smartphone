@@ -22,8 +22,6 @@
 ******************************************************************************/
 using System;
 using System.Windows.Forms;
-using phone.Controllers;
-using phone.Models;
 
 namespace phone
 {
