@@ -35,17 +35,23 @@ namespace phone
         [STAThread]
         static void Main()
         {
-            string strTo = "Server=127.0.0.1";
-            string strUser = "Uid=root";
-            string strPassword = "Pwd=root";
-            string strDataBase = "Database=db_phones";
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Model aModel = new Model(strTo, strUser, strPassword, strDataBase);
-            View aView = new View();
-            Controller aCtrler = new Controller(aModel, aView);
-            
-            Application.Run(aView);
+            try
+            {
+                string strTo = "Server=127.0.0.1";
+                string strUser = "Uid=root";
+                string strPassword = "Pwd=root";
+                string strDataBase = "Database=db_phones";
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Model aModel = new Model(strTo, strUser, strPassword, strDataBase);
+                View aView = new View();
+                Controller aCtrler = new Controller(aModel, aView);
+
+                Application.Run(aView);
+            }catch(Exception e)
+            {
+                MessageBox.Show(Convert.ToString(e));
+            }
         }
     }
 }
