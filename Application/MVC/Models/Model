@@ -20,17 +20,13 @@
 ** Process data, create queries and return result.                           **
 **                                                                           **
 ******************************************************************************/
-using phone.Controllers;
+
 using System;
 using System.Data;
 using System.Data.CData.MySQL;
 
-namespace phone.Models
-{
-
     public class Model
     {
-
         /// <summary>
         /// get set
         /// </summary>
@@ -229,7 +225,7 @@ namespace phone.Models
         /// <returns></returns>
         public DataTable SpecificQueryCommandPriEvo()
         {
-            string strQuery = "";
+            string strQuery = "SELECT `t_telephone`.`telName` AS 'Nom du téléphone', `t_price`.`priDate` AS Date, `t_price`.`priPrice` AS Prix FROM `t_telephone`  LEFT JOIN `t_price` ON `t_price`.`fkTelephone`=`t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` ASC;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -239,4 +235,4 @@ namespace phone.Models
         }
         ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
     }
-}
+
