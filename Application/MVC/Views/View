@@ -26,7 +26,7 @@ using System.Data;
 
     public partial class View : Form
     {
-        /// <summary>
+                /// <summary>
         /// getter et setter
         /// </summary>
         public Controller Ctrler { get; set; }
@@ -59,53 +59,72 @@ using System.Data;
         }
 
         /// <summary>
-        /// va chercher toutes les valeurs
+        /// Button that will search for a radiobutton checked then if it's true, it will uncheck it and show all of the phones characteristics. Calls the ctrler for the latter.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtnApplySearch_Click(object sender, EventArgs e)
         {
-            //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
-            if (radBtnBestAutonomy.Checked == true)
+            foreach(RadioButton but in grpBoxSearch.Controls.OfType<RadioButton>())
             {
-                Ctrler.SpecificQuery("Battery");
+                if (but.Checked == true)
+                {
+                    but.Checked = false;
+                    Ctrler.SetGrid();
+                    break;
+                }
             }
-            else if (radBtnBestPhones.Checked == true)
-            {
-                Ctrler.SpecificQuery("Best");
-            }
-            else if (radBtnCheapest.Checked == true)
-            {
-                Ctrler.SpecificQuery("Cheapest");
-            }
-            else if (radBtnBestCpu.Checked == true)
-            {
-                Ctrler.SpecificQuery("CPU");
-            }
-            else if (radBtnMoreExpensive.Checked == true)
-            {
-                Ctrler.SpecificQuery("Expensive");
-            }
-            else if (radBtnManufacturer.Checked == true)
-            {
-                Ctrler.SpecificQuery("Manufacturer");
-            }
-            else if (radBtnOS.Checked == true)
-            {
-                Ctrler.SpecificQuery("OS");
-            }
-            else if (radBtnPriceEvolution.Checked == true)
-            {
-                Ctrler.SpecificQuery("PriceEvo");
-            }
-            else if (radBtnScreenSize.Checked == true)
-            {
-                Ctrler.SpecificQuery("Screen");
-            }
-            else
-            {
-                MessageBox.Show("erreure de validation.");
-            }
+        }
+
+        //vérifier les radio bouton pour savoir se que l'utiliasateur veut afficher comme base de donné
+
+            
+        private void radBtnPriceEvolution_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("PriceEvo");
+        }
+
+            
+        private void radBtnOS_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("OS");
+        }
+
+        private void radBtnScreenSize_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Screen");
+        }
+
+        private void radBtnManufacturer_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Manufacturer");
+        }
+        
+        private void radBtnBestAutonomy_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Battery");
+        }
+
+        private void radBtnMoreExpensive_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Expensive");
+        }
+
+        private void radBtnBestCpu_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("CPU");
+        }
+
+        private void radBtnBestPhones_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Best");
+        }
+
+        private void radBtnCheapest_CheckedChanged(object sender, EventArgs e)
+        {
+            Ctrler.SpecificQuery("Cheapest");
+        }
+
         }
     }
 
