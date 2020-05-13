@@ -20,9 +20,7 @@
 ******************************************************************************/
 using System.Data;
 
-{
-
-    public class Controller
+public class Controller
     {
         //variable
         private Model _model;
@@ -34,7 +32,7 @@ using System.Data;
         /// </summary>
         /// <param name="aModel">model</param>
         /// <param name="aView">disigne</param>
-        public Controller (Model aModel, View aView)
+        public Controller(Model aModel, View aView)
         {
             this._model = aModel;
             this._view = aView;
@@ -48,9 +46,9 @@ using System.Data;
         /// Receive the predefined choice from the radio button for the specific query
         /// </summary>
         /// <param name="choose"></param>
-        public void SpecificQuery (string strSelection)
+        public void SpecificQuery(string strSelection)
         {
-            switch(strSelection)
+            switch (strSelection)
             {
                 case "Battery":
                     DataTable dtTableSpeQueryBat = _model.SpecificQueryCommandBattery();
@@ -90,6 +88,10 @@ using System.Data;
                     DataTable dtTableSpeQueryCheapest = _model.SpecificQueryCommandCheapest();
                     _view.SetGridView(dtTableSpeQueryCheapest);
                     break;
+                case "PriceEvo":
+                    DataTable dtTableSpeQueryPriceEvo = _model.SpecificQueryCommandPriEvo();
+                    _view.SetItForImage(dtTableSpeQueryPriceEvo);
+                    break;
                 default:
 
                     break;
@@ -106,4 +108,3 @@ using System.Data;
             _view.SetGridView(dtTable);
         }
     }
-}
