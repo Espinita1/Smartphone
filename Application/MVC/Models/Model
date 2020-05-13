@@ -21,11 +21,10 @@
 **                                                                           **
 ******************************************************************************/
 
-using System;
 using System.Data;
 using System.Data.CData.MySQL;
 
-    public class Model
+public class Model
     {
         /// <summary>
         /// get set
@@ -225,7 +224,7 @@ using System.Data.CData.MySQL;
         /// <returns></returns>
         public DataTable SpecificQueryCommandPriEvo()
         {
-            string strQuery = "SELECT `t_telephone`.`telName` AS 'Nom du téléphone', `t_price`.`priDate` AS Date, `t_price`.`priPrice` AS Prix FROM `t_telephone`  LEFT JOIN `t_price` ON `t_price`.`fkTelephone`=`t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` ASC;";
+            string strQuery = "SELECT `t_telephone`.`telName` AS 'Nom du téléphone', `t_price`.`priGraphic` AS 'Prix d''evolution' FROM `t_telephone`  LEFT JOIN `t_price` ON `t_price`.`fkTelephone`=`t_telephone`.`idTelephone` ORDER BY `t_price`.`priDate` ASC LIMIT 30;";
 
             MySQLDataAdapter msqlQueryResult = QueryMaker(strQuery);
 
@@ -235,4 +234,3 @@ using System.Data.CData.MySQL;
         }
         ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
     }
-
