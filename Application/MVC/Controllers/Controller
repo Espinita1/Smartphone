@@ -119,5 +119,6 @@ namespace Phones.Controllers
             DataTable dttbSearch =this._model.QueryTextResearchBar(strText);
             this._view.SetGridView(dttbSearch);
         }
+        
     }
 }
