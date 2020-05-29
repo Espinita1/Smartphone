@@ -233,21 +233,39 @@ public class Model
             return dttblSpecificQueryPriEvo;
         }
         
+        /// <summary>
+        /// Research any string on query
+        /// </summary>
+        /// <param name="strText"></param>
+        /// <returns></returns>
         public DataTable QueryTextResearchBar(string strText)
         {
-            string strQuery = "SELECT telName FROM t_telephone where telName LIKE @strText";
-            MySQLDataAdapter adapter = QueryMakerAddValue(strQuery, strText);
+            // A query with a placeholder @strText
+            string strQuery = "SELECT telName AS Téléphone, stoCapacity AS Stockage, cpuNbrCore AS ' nombre de coeurs', cpuFrequence as Fréquence, ramQuantity AS Ram, manName AS Fabricant, batCapacity AS Capacité, batDuration AS Duration, venName as Vendeur, opeName AS 'Système d''exploitation', priPrice AS Prix FROM t_telephone INNER JOIN t_storage ON fkStorage=idStorage INNER JOIN t_ram ON fkRam=idRam INNER JOIN t_manufacturer ON fkManufacturer = idManufacturer INNER JOIN t_battery ON fkBattery = idBattery INNER JOIN t_vendor ON fkVendor=idVendor INNER JOIN t_operativeSystem on fkOperativeSystem=idOperativeSystem INNER JOIN t_cpu on fkCPU = idCPU INNER JOIN t_price ON fkTelephone=idTelephone WHERE telName LIKE @strText";
+            // Call method to insert a value in @strText
+            MySqlDataAdapter adapter = QueryMakerAddValue(strQuery, strText);
+            // Fill Datatable with the adapter information
             DataTable dttbQueryResearch = FormatTheData(adapter);
+            // return it
             return dttbQueryResearch;
         }
 
-        private MySQLDataAdapter QueryMakerAddValue(string strQuery, string strText)
+        /// <summary>
+        /// Method that will further reinforce the security, establish an instance of mysql adapter and insert a value in @strText then return the result to adapter in QueryTextResearchbar
+        /// </summary>
+        /// <param name="strQuery"></param>
+        /// <param name="strText"></param>
+        /// <returns></returns>
+        private MySqlDataAdapter QueryMakerAddValue(string strQuery, string strText)
         {
             // Initializes a new instance of the MySqlDataAdapter class with a SelectCommand and a MySqlConnection object.
-            MySQLDataAdapter mySqlAdapter = new MySQLDataAdapter(strQuery, mySqlConnector);
-            mySqlAdapter.SelectCommand.Parameters.Add("@strText", "%"+strText+"%");
+            MySqlDataAdapter mySqlAdapter = new MySqlDataAdapter(strQuery, mySqlConnector);
+            // Insert value in @strText
+            mySqlAdapter.SelectCommand.Parameters.AddWithValue("@strText", "%" + strText + "%");
             // Return command
             return mySqlAdapter;
         }
+        ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
+    }
         ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
     }
