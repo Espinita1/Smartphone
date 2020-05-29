@@ -137,4 +137,9 @@ public partial class View : Form
         {
             Ctrler.SpecificQuery("Cheapest");
         }
+        
+        private void txtBoxSearchPhoneName_TextChanged(object sender, EventArgs e)
+        {
+            Ctrler.TextSearch(txtBoxSearchPhoneName.Text);
+        }
     }
