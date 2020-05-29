@@ -121,7 +121,7 @@ namespace Phones.Controllers
         public void TextSearch(string strText)
         {
             
-            Regex rgx = new Regex("^([A-Za-z ]*)*$"); // No special characters
+            Regex rgx = new Regex("^([A-Za-z0-9 ]*)*$"); // No special characters
             if(rgx.IsMatch(strText))
             {
                 DataTable dttbSearch = this._model.QueryTextResearchBar(strText);
