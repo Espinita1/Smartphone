@@ -232,5 +232,22 @@ public class Model
 
             return dttblSpecificQueryPriEvo;
         }
+        
+        public DataTable QueryTextResearchBar(string strText)
+        {
+            string strQuery = "SELECT telName FROM t_telephone where telName LIKE @strText";
+            MySQLDataAdapter adapter = QueryMakerAddValue(strQuery, strText);
+            DataTable dttbQueryResearch = FormatTheData(adapter);
+            return dttbQueryResearch;
+        }
+
+        private MySQLDataAdapter QueryMakerAddValue(string strQuery, string strText)
+        {
+            // Initializes a new instance of the MySqlDataAdapter class with a SelectCommand and a MySqlConnection object.
+            MySQLDataAdapter mySqlAdapter = new MySQLDataAdapter(strQuery, mySqlConnector);
+            mySqlAdapter.SelectCommand.Parameters.Add("@strText", "%"+strText+"%");
+            // Return command
+            return mySqlAdapter;
+        }
         ////////////////////////////////// Sp. QUERIES ///////////////////////////////////////
     }
