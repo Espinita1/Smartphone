@@ -114,10 +114,23 @@ namespace Phones.Controllers
             _view.SetGridView(dtTable);
         }
 
+        /// <summary>
+        /// A method to avoid injection attacks and that calls the model's method to retrieve information and show it by calling the view's method
+        /// </summary>
+        /// <param name="strText"></param>
         public void TextSearch(string strText)
         {
-            DataTable dttbSearch =this._model.QueryTextResearchBar(strText);
-            this._view.SetGridView(dttbSearch);
+            
+            Regex rgx = new Regex("^([A-Za-z ]*)*$"); // No special characters
+            if(rgx.IsMatch(strText))
+            {
+                DataTable dttbSearch = this._model.QueryTextResearchBar(strText);
+                this._view.SetGridView(dttbSearch);
+            }else
+            {
+                MessageBox.Show("Caractère invalid.");
+                _view.txtErase();
+            }
         }
     }
 }
