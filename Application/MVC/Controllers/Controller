@@ -18,9 +18,15 @@
 ** by the model here be prepared to pass it to the view, control of          **
 ** exceptions.                                                               **
 ******************************************************************************/
+using System;
 using System.Data;
+using System.Linq;
+using System.Windows.Forms;
+using Phones.Models;
 
-public class Controller
+namespace Phones.Controllers
+{
+    public class Controller
     {
         //variable
         private Model _model;
@@ -107,4 +113,11 @@ public class Controller
             DataTable dtTable = _model.GetAllInfos();
             _view.SetGridView(dtTable);
         }
+
+        public void TextSearch(string strText)
+        {
+            DataTable dttbSearch =this._model.QueryTextResearchBar(strText);
+            this._view.SetGridView(dttbSearch);
+        }
     }
+}
