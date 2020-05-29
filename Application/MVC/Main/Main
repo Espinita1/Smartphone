@@ -39,14 +39,15 @@ namespace phone
                 string strUser = "Uid=root";
                 string strPassword = "Pwd=root";
                 string strDataBase = "Database=db_phones";
+                string strCharSet = "CharSet=utf8";
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Model aModel = new Model(strTo, strUser, strPassword, strDataBase);
+                Model aModel = new Model(strTo, strUser, strPassword, strDataBase, strCharSet);
                 View aView = new View();
                 Controller aCtrler = new Controller(aModel, aView);
-
                 Application.Run(aView);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(Convert.ToString(e));
             }
