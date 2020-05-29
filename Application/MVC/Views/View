@@ -56,6 +56,7 @@ public partial class View : Form
         public void SetGridView(DataTable dttblParam)
         {
             dtgrdApplication.DataSource = dttblParam;
+            dtgrdApplication.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
         
         // Fit the image on the screen for the price evolution, adjusting the datagrid to all content in its respective cells.
@@ -92,54 +93,59 @@ public partial class View : Form
         }
 
         //These radio buttons are the ones that call the hard-coded queries.
-        private void radBtnPriceEvolution_CheckedChanged(object sender, EventArgs e)
+        private void radBtnPriceEvolutionCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("PriceEvo");
         }
 
 
-        private void radBtnOS_CheckedChanged(object sender, EventArgs e)
+        private void radBtnOSCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("OS");
         }
 
-        private void radBtnScreenSize_CheckedChanged(object sender, EventArgs e)
+        private void radBtnScreenSizeCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Screen");
         }
 
-        private void radBtnManufacturer_CheckedChanged(object sender, EventArgs e)
+        private void radBtnManufacturerCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Manufacturer");
         }
 
-        private void radBtnBestAutonomy_CheckedChanged(object sender, EventArgs e)
+        private void radBtnBestAutonomyCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Battery");
         }
 
-        private void radBtnMoreExpensive_CheckedChanged(object sender, EventArgs e)
+        private void radBtnMostExpensiveCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Expensive");
         }
 
-        private void radBtnBestCpu_CheckedChanged(object sender, EventArgs e)
+        private void radBtnBestCpuCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("CPU");
         }
 
-        private void radBtnBestPhones_CheckedChanged(object sender, EventArgs e)
+        private void radBtnBestPhonesCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Best");
         }
 
-        private void radBtnCheapest_CheckedChanged(object sender, EventArgs e)
+        private void radBtnCheapestCheck(object sender, EventArgs e)
         {
             Ctrler.SpecificQuery("Cheapest");
         }
-        
-        private void txtBoxSearchPhoneName_TextChanged(object sender, EventArgs e)
+
+        private void txtBoxSearchPhone(object sender, EventArgs e)
         {
             Ctrler.TextSearch(txtBoxSearchPhoneName.Text);
+        }
+
+        public void txtErase()
+        {
+            txtBoxSearchPhoneName.Clear();
         }
     }
